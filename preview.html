@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aiza El Diana — Finance, Accounting & Islamic Finance Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              accent: {
+                DEFAULT: '#2c67ed',
+                light: '#5b8ef5',
+                dark: '#1d4ed8',
+              },
+            },
+            fontFamily: {
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+              display: ['Space Grotesk', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html {
+        scroll-behavior: smooth;
+        background-color: #03050a;
+        color: #f8fafc;
+      }
+      body {
+        margin: 0;
+        font-family: 'Inter', system-ui, sans-serif;
+        background-color: #03050a;
+        overflow-x: hidden;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #03050a;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1e293b;
+        border-radius: 9999px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #2c67ed;
+      }
+      .space-card {
+        background: linear-gradient(145deg, rgba(13, 20, 36, 0.78) 0%, rgba(7, 11, 20, 0.88) 100%);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(44, 103, 237, 0.22);
+        transition: all 0.3s ease;
+      }
+      .space-card:hover {
+        border-color: rgba(44, 103, 237, 0.58);
+        box-shadow: 0 10px 35px -5px rgba(44, 103, 237, 0.25);
+      }
+    </style>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body class="bg-[#03050a] text-slate-100 antialiased selection:bg-[#2c67ed] selection:text-white">
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useState, useEffect, useRef } = React;
+      const motion = window.Motion ? window.Motion.motion : {
+        div: (props) => <div {...props} />,
+        nav: (props) => <nav {...props} />,
+        h1: (props) => <h1 {...props} />,
+        p: (props) => <p {...props} />,
+        span: (props) => <span {...props} />,
+      };
+      const AnimatePresence = window.Motion
+        ? window.Motion.AnimatePresence
+        : ({ children }) => <>{children}</>;
+
+      const profileData = {
+        name: 'Aiza El Diana',
+        fullName: 'Aiza El Diana Suprayogi',
+        roles: [
+          'Finance & Accounting Student',
+          'Islamic Finance Enthusiast',
+          'Financial Researcher',
+        ],
+        tagline:
+          'Mahasiswa D4 Keuangan dan Perbankan Syariah Politeknik Negeri Jakarta (IPK 3,71) bersertifikasi Certified Accurate Professional (CAP - Nilai 100). Berfokus pada analisis laporan keuangan, manajemen anggaran (budgeting), perhitungan HPP, serta riset kebijakan dan investasi keuangan syariah.',
+        location: 'Depok, Jawa Barat, Indonesia',
+        email: 'aiza.diana05@gmail.com',
+        phone: '+62 813-9872-1976',
+        linkedin: 'https://www.linkedin.com/in/aiza-diana-59169830b',
+        photoUrl: './public/assets/profile-aiza.jpeg',
+        cvUrl: './public/assets/CV_Aiza_El_Diana_Suprayogi.pdf',
+      };
+
+      const educationData = [
+        {
+          institution: 'Politeknik Negeri Jakarta (PNJ)',
+          degree: 'D4 Keuangan dan Perbankan Syariah — Jurusan Akuntansi',
+          period: 'Sep 2024 – Sekarang',
+          gpa: 'IPK 3.71 / 4.00',
+          highlights: [
+            'Mata kuliah relevan: Akuntansi Keuangan & Bank Syariah, Lembaga Keuangan Syariah, Manajemen Investasi & Pasar Modal Syariah, Matematika Bisnis.',
+            'Lulus Sertifikasi Certified Accurate Professional (CAP) dengan Nilai Sempurna (100/100).',
+            'Aktif dalam riset kebijakan ekonomi Islam (ANP/AHP) dan studi kasus perbankan syariah.',
+          ],
+        },
+        {
+          institution: 'Islamic Teacher Training College (ITTC) Darussalam',
+          degree: 'Jurusan Ilmu Pengetahuan Alam (IPA) — Pondok Modern',
+          period: '2017 – 2023',
+          gpa: 'Nilai Rata-rata: 86,3',
+          highlights: [
+            'Pendidikan komprehensif setingkat SMP–SMA berbasis pesantren modern dengan penguasaan Bahasa Indonesia, Inggris, dan Arab.',
+            'Ketua Umum Panitia Gebyar Seni Darussalam (GSD) 2023 — memimpin 60 panitia untuk 400 peserta & 1.000+ penonton.',
+          ],
+        },
+      ];
+
+      const leadershipData = [
+        {
+          role: 'Station Manager',
+          organization: 'Poros FM — Radio Kampus Politeknik Negeri Jakarta',
+          period: 'Des 2025 – Sekarang',
+          badge: 'Top Leadership',
+          description:
+            'Memimpin 120 anggota aktif dan mengoordinasikan seluruh aktivitas operasional penyiaran, manajemen program unggulan NOTES, kemitraan media, serta tata kelola organisasi.',
+          metrics: '120 Anggota Dipimpin',
+        },
+        {
+          role: 'Google Student Ambassador (Class of 2025)',
+          organization: 'Google Indonesia (#TeamGoogle)',
+          period: 'Sep 2025 – Feb 2026',
+          badge: 'Selected Top Talent',
+          description:
+            'Terpilih dari 12.000+ pendaftar mahasiswa tingkat nasional. Memimpin komunitas #TeamGoogle di kampus serta menjadi Guest Speaker "Pencerdasan Literasi AI Bersama FGBS" untuk edukasi adopsi Google Gemini AI Pro.',
+          metrics: 'Top Selection dari 12.000+ Mahasiswa',
+        },
+        {
+          role: 'Bendahara Umum (Head Treasurer)',
+          organization: 'Porosmian 2025 & Workshop Kesenian',
+          period: '2022 – 2025',
+          badge: 'Financial Governance',
+          description:
+            'Mengelola penyusunan Rencana Anggaran Biaya (RAB), kontrol arus kas (cashflow), pencatatan transaksi di Microsoft Excel, dan penyusunan Laporan Pertanggungjawaban (LPJ) keuangan secara presisi & akuntabel.',
+          metrics: 'Rp 31+ Juta Dana Dikelola',
+        },
+        {
+          role: 'Administrasi (Bendahara & Sekretaris) & Kewirausahaan',
+          organization: 'FGBS & KSEI ForSEI Politeknik Negeri Jakarta',
+          period: 'Mei 2025 – Des 2025',
+          badge: 'Sharia Economics & Admin',
+          description:
+            'Mengelola pencatatan keuangan organisasi FGBS, administrasi persuratan, serta manajemen pendapatan unit kewirausahaan (merchandise, F&B) dan program filantropi Islam (ODOT).',
+          metrics: '100% Akuntabilitas Laporan',
+        },
+      ];
+
+      const analyticsStats = {
+        summaryCards: [
+          {
+            label: 'Total Anggaran & Kas Dikelola',
+            value: 'Rp 31+ Juta',
+            subtext: 'Porosmian (Rp16 Jt) & Workshop (Rp15 Jt)',
+            trend: '+100% Akuntabel',
+          },
+          {
+            label: 'Skor Sertifikasi Accurate (CAP)',
+            value: '100 / 100',
+            subtext: 'PT Ultima Tekno Solusindo (2026)',
+            trend: 'Nilai Sempurna',
+          },
+          {
+            label: 'Indeks Prestasi Kumulatif',
+            value: '3.71 / 4.00',
+            subtext: 'D4 Keuangan & Perbankan Syariah PNJ',
+            trend: 'Cum Laude Track',
+          },
+          {
+            label: 'Kepemimpinan & Komunitas',
+            value: '120+ Orang',
+            subtext: 'Station Manager Poros FM & GSA',
+            trend: 'Active Leader',
+          },
+        ],
+        budgetBreakdown: [
+          {
+            project: 'Manajemen Anggaran Porosmian 2025',
+            budget: 'Rp 16.000.000',
+            accuracy: 98,
+            category: 'Event Budgeting & LPJ',
+            details: 'Alokasi multi-divisi, kontrol pencairan dana, & rekonsiliasi kas berbasis Microsoft Excel.',
+          },
+          {
+            project: 'Calligraphy & Painting Workshop',
+            budget: 'Rp 15.000.000',
+            accuracy: 97,
+            category: 'Cost Control & Cashflow',
+            details: 'Penyusunan RAB kegiatan untuk 100+ peserta dengan efisiensi pengeluaran logistik & operasional.',
+          },
+          {
+            project: 'Simulasi HPP & Margin Produk UMKM',
+            budget: 'Cost-Plus & Break-Even',
+            accuracy: 95,
+            category: 'Rancangan HPP & Pricing',
+            details: 'Perhitungan Harga Pokok Produksi (Bahan Baku, Tenaga Kerja, Overhead) & margin akad Murabahah/MMQ.',
+          },
+          {
+            project: 'Riset Prioritas Kebijakan Syariah (ANP/AHP)',
+            budget: 'CR < 0.10 (Valid)',
+            accuracy: 96,
+            category: 'Quantitative Policy Research',
+            details: 'Bobot prioritas: Infrastruktur Digital (40%), Efektivitas Edukasi (30%), Akses UMKM (20%), Regulasi (10%).',
+          },
+        ],
+      };
+
+      const portfolioTabs = {
+        businessCases: [
+          {
+            id: 'anp-ahp-syahaza',
+            title: 'Riset ANP/AHP & Sharia Policy Case Study: Platform "Syahaza"',
+            subtitle: 'TEMILNAS XXIV FoSSEI x 21st SECOND Universitas Indonesia (2025)',
+            category: 'Riset ANP/AHP & Kebijakan Syariah',
+            highlightMetric: 'Juara 3 Nasional • Bobot Digitalisasi 40%',
+            summary:
+              'Studi kasus kebijakan dan pemetaan prioritas menggunakan pendekatan Analytic Network / Hierarchy Process (ANP/AHP) terhadap 16 UMKM di Kota Depok untuk menjembatani gap literasi (43,42%) dan inklusi (13,41%) keuangan syariah.',
+            keyPoints: [
+              'Pemetaan Matriks Prioritas ANP/AHP: Infrastruktur Digital (40%), Efektivitas Edukasi (30%), Akses UMKM (20%), dan Regulasi Syariah (10%).',
+              'Perancangan prototipe aplikasi "Syahaza" dengan skema pembiayaan akad Musyarakah Mutanaqisah (MMQ) dan integrasi dana sosial ZISWAF.',
+              'Rekomendasi kebijakan strategis berbasis bukti untuk mendukung RPJMN 2025–2029 dan ekosistem rantai pasok halal UMKM.',
+            ],
+            metrics: [
+              { label: 'Metode Riset', value: 'ANP / AHP & Field Case' },
+              { label: 'Prioritas Utama', value: 'Platform Digital (35%)' },
+              { label: 'Skema Akad', value: 'Musyarakah Mutanaqisah' },
+            ],
+            tags: ['Riset ANP/AHP', 'Sharia Policy', 'Akad MMQ', 'UMKM & ZISWAF'],
+            documentUrl: './public/assets/projects/temilnas-policy-case-study.pdf',
+          },
+          {
+            id: 'hpp-budgeting-umkm',
+            title: 'Rancangan HPP, Budgeting Multi-Divisi & Analisis Efisiensi Kas',
+            subtitle: 'Manajemen Anggaran Organisasi & Studi Kelayakan Bisnis (BCC YED UI)',
+            category: 'Rancangan HPP & Budgeting',
+            highlightMetric: 'Rp 31.000.000+ Total Dana Dikelola',
+            summary:
+              'Penyusunan struktur Harga Pokok Produksi (HPP), Rencana Anggaran Biaya (RAB), proyeksi arus kas, dan analisis Break-Even Point (BEP) untuk proyek kewirausahaan, kompetisi Business Case (YED UI), serta kepanitiaan skala besar.',
+            keyPoints: [
+              'Perhitungan HPP komprehensif: klasifikasi biaya bahan baku langsung, tenaga kerja langsung, dan overhead pabrik/operasional untuk penentuan harga jual kompetitif.',
+              'Manajemen anggaran Rp 16.000.000 (Porosmian 2025) & Rp 15.000.000 (Workshop Seni) dengan sistem tracking real-time di Microsoft Excel.',
+              'Pengendalian varians anggaran (budget vs actual variance analysis) dan penyusunan Laporan Pertanggungjawaban (LPJ) bebas selisih.',
+            ],
+            metrics: [
+              { label: 'Total RAB Dikelola', value: 'Rp 31.000.000+' },
+              { label: 'Akurasi Rekonsiliasi', value: '100% Balance' },
+              { label: 'Instrumen Analisis', value: 'HPP, BEP, RAB & LPJ' },
+            ],
+            tags: ['Rancangan HPP', 'Budgeting & RAB', 'Cost Accounting', 'Microsoft Excel'],
+            documentUrl: './public/assets/CV_Aiza_El_Diana_Suprayogi.pdf',
+          },
+          {
+            id: 'bca-syariah-accounting',
+            title: 'Analisis Penyajian Transaksi & Laporan Keuangan PT Bank BCA Syariah',
+            subtitle: 'Project Based Learning — Akuntansi Perbankan Syariah (2025)',
+            category: 'Financial Statement & PSAK Syariah',
+            highlightMetric: 'Total Aset Dianalisis: Rp 16,64 Triliun',
+            summary:
+              'Evaluasi mendalam terhadap penerapan PSAK Syariah (PSAK 101–107 & 205) pada Laporan Keuangan PT Bank BCA Syariah Tahun 2024, mencakup penghimpunan DPK, pembiayaan, rekonsiliasi bagi hasil, serta dana zakat dan kebajikan.',
+            keyPoints: [
+              'Analisis portofolio pembiayaan Musyarakah (Rp 6,97 Triliun / 65,1% porsi), Piutang Murabahah (Rp 1,93 Triliun), Mudharabah (Rp 868,5 Miliar), dan IMBT (+55,8% YoY).',
+              'Bedah mekanisme distribusi hasil usaha (nisbah bagi hasil) Dana Syirkah Temporer senilai Rp 9,60 Triliun dan pembentukan CKPN.',
+              'Evaluasi rasio kesehatan bank: pertumbuhan laba bersih +19,5% YoY (Rp 183,7 Miliar), NPF Bruto terjaga rendah 1,54%, dan CAR solid di 29,6%.',
+            ],
+            metrics: [
+              { label: 'Aset BCA Syariah', value: 'Rp 16,64 Triliun' },
+              { label: 'NPF Bruto / CAR', value: '1,54% / 29,6%' },
+              { label: 'Standar Akuntansi', value: 'PSAK Syariah & DSN-MUI' },
+            ],
+            tags: ['PSAK Syariah', 'Financial Audit', 'BCA Syariah', 'Risk & NPF Analysis'],
+            documentUrl: './public/assets/projects/akuntansi-bank-syariah-bca.pdf',
+          },
+          {
+            id: 'stock-portfolio-sim',
+            title: 'Analisis Portofolio Saham Optimal (Single Index Model)',
+            subtitle: 'Project Based Learning — Manajemen Investasi & Pasar Modal Syariah (2026)',
+            category: 'Capital Market & Portfolio Valuation',
+            highlightMetric: 'Cut-Off Point: 0,01211 (Elton-Gruber-Padberg)',
+            summary:
+              'Pembentukan portofolio saham optimal menggunakan metode Single Index Model (Elton-Gruber-Padberg) disertai analisis fundamental (ROA, ROE, DER, PER, PBV, EV/EBITDA) dan analisis teknikal (MA Cross & Candlestick) pada 3 emiten BEI.',
+            keyPoints: [
+              'Perhitungan bobot portofolio optimal dari 24 bulan data historis terhadap IHSG (^JKSE): CASS.JK (44,42%), EXCL.JK (39,08%), dan DGIK (16,50%).',
+              'Komparasi kinerja fundamental: CASS.JK unggul dengan ROA 14,2%, ROE 22,1%, dan Debt-to-Equity sangat sehat di 0,05x; DGIK mencatat Sales Growth tertinggi +33,6%.',
+              'Integrasi analisis makroekonomi (PDB 5,11%, BI Rate 5,75%, Inflasi & Kurs USD/IDR) dengan manajemen risiko teknikal.',
+            ],
+            metrics: [
+              { label: 'Metode Optimasi', value: 'Single Index Model' },
+              { label: 'Bobot Optimal', value: 'CASS 44% • EXCL 39%' },
+              { label: 'Cakupan Evaluasi', value: 'Fundamental & Teknikal' },
+            ],
+            tags: ['Single Index Model', 'Fundamental Valuation', 'Technical Analysis', 'Sharia Capital Market'],
+            documentUrl: './public/assets/projects/manajemen-investasi-portofolio.pdf',
+          },
+        ],
+        awards: [
+          {
+            id: 'juara-3-temilnas',
+            title: 'Juara 3 Sharia Policy Case Study Competition',
+            issuer: 'TEMILNAS XXIV FoSSEI × The 21st SECOND FEB Universitas Indonesia',
+            year: '2025',
+            badge: '3rd Place Winner (National)',
+            description:
+              'Meraih Juara 3 tingkat nasional dalam kompetisi studi kasus kebijakan ekonomi Islam bertema "Resilience of Multi-Sector through Technology Transformation to Strengthen Inclusive and Sustainable Islamic Economic Growth".',
+            previewUrl: './public/assets/certificates/temilnas-juara3.pdf',
+            previewType: 'pdf',
+          },
+          {
+            id: 'bcc-yed-ui',
+            title: 'Finalis / Semifinalis Business Case Competition (BCC) YED UI',
+            issuer: 'Youth Economic Days (YED) BEM FMIPA Universitas Indonesia',
+            year: '2025',
+            badge: 'BCC UI Finalist Stage',
+            description:
+              'Terpilih sebagai Semifinalis/Finalis dalam ajang YED UI Business Case Competition (November–Desember 2025), menyusun solusi strategi bisnis, proyeksi keuangan, dan efisiensi biaya korporasi.',
+            previewUrl: './public/assets/certificates/yed-ui-bcc.jpg',
+            previewType: 'image',
+          },
+          {
+            id: 'cap-accurate',
+            title: 'Certified Accurate Professional (CAP) — Nilai Sempurna 100',
+            issuer: 'PT Ultima Tekno Solusindo & Accurate Accounting Software',
+            year: '2026',
+            badge: 'Score: 100 / 100 (Lulus)',
+            description:
+              'Lulus ujian sertifikasi profesi akuntansi komputerisasi Accurate Online dengan perolehan nilai sempurna 100 (Peringkat 1 Kelas BS 4B Politeknik Negeri Jakarta).',
+            previewUrl: './public/assets/certificates/sertifikasi-cap.jpeg',
+            previewType: 'image',
+          },
+          {
+            id: 'gsa-graduation',
+            title: 'Google Student Ambassador — Certificate of Graduation & Excellence',
+            issuer: 'Google Indonesia (#TeamGoogle Class of 2025)',
+            year: '2025 – 2026',
+            badge: 'Top 12,000+ Nationwide Pool',
+            description:
+              'Dianugerahkan atas kepemimpinan luar biasa sebagai Google Student Ambassador (On-Campus Event Host & Excellence Badge) dalam mendorong adopsi literasi Google AI di lingkungan kampus.',
+            previewUrl: './public/assets/certificates/gsa-graduation.pdf',
+            previewType: 'pdf',
+          },
+          {
+            id: 'gsa-speaker',
+            title: 'Guest Speaker & Partnership — First Gathering Finance & Sharia Banking',
+            issuer: 'Program Studi D4 Keuangan dan Perbankan Syariah PNJ',
+            year: '2025',
+            badge: 'Featured AI Speaker',
+            description:
+              'Pembicara tamu dalam sesi "Pencerdasan Literasi AI Bersama FGBS" (29 November 2025), mengedukasi mahasiswa perbankan syariah mengenai pemanfaatan Google Gemini AI untuk produktivitas riset dan keuangan.',
+            previewUrl: './public/assets/certificates/gsa-speaker.jpg',
+            previewType: 'image',
+          },
+          {
+            id: 'puisi-nasional',
+            title: 'Penulis Terpilih Lomba Cipta Puisi Nasional 2024',
+            issuer: 'PT Bara Pustaka Group (1.307 Peserta Nasional)',
+            year: '2024',
+            badge: 'National Selected Writer',
+            description:
+              'Terpilih sebagai Penulis Terpilih tingkat nasional dari 1.307 peserta seluruh Indonesia, membuktikan kemampuan komunikasi tertulis dan penyusunan narasi yang kuat.',
+            previewUrl: './public/assets/certificates/puisi-nasional.jpg',
+            previewType: 'image',
+          },
+        ],
+        financialTools: [
+          {
+            id: 'excel',
+            name: 'Microsoft Excel',
+            category: 'Financial Modeling, HPP & Budgeting',
+            level: 'Advanced (95%)',
+            percentage: 95,
+            badge: 'Core Daily Tool',
+            description:
+              'Penyusunan Rencana Anggaran Biaya (RAB), perhitungan Harga Pokok Produksi (HPP), pembukuan kas keluar/masuk organisasi, serta pemodelan portofolio investasi (Single Index Model, Regresi Beta, & Rasio Keuangan).',
+            capabilities: [
+              'RAB & Cashflow Tracking',
+              'Perhitungan HPP & BEP',
+              'Single Index Model & Statistik',
+              'Pivot Table & Financial Lookup',
+            ],
+          },
+          {
+            id: 'accurate',
+            name: 'Accurate Online',
+            category: 'Cloud Accounting & Financial Reporting',
+            level: 'Certified Professional — Score 100 (98%)',
+            percentage: 98,
+            badge: 'CAP Certified (100/100)',
+            description:
+              'Software akuntansi bisnis terintegrasi untuk siklus akuntansi lengkap: setup database perusahaan, pencatatan jurnal umum, buku besar, manajemen persediaan & HPP, rekonsiliasi bank, hingga laporan laba rugi dan neraca otomatis.',
+            capabilities: [
+              'Setup Database & COA',
+              'Siklus Pembelian, Penjualan & HPP',
+              'Rekonsiliasi Pajak & Bank',
+              'Laporan Keuangan Standar SAK',
+            ],
+          },
+          {
+            id: 'csbo',
+            name: 'CSBO',
+            fullName: 'Customer Service & Banking Operations System',
+            category: 'Sharia Banking Front-Office & Operations',
+            level: 'Proficient (90%)',
+            percentage: 90,
+            badge: 'Banking Operations',
+            description:
+              'Sistem operasional layanan nasabah perbankan syariah untuk simulasi pembukaan rekening akad Wadiah & Mudharabah (Tabungan, Giro, Deposito), administrasi pembiayaan (Murabahah, Musyarakah, IMBT), dan kepatuhan KYC/APU-PPT.',
+            capabilities: [
+              'Pembukaan Rekening Wadiah/Mudharabah',
+              'Administrasi Akad Pembiayaan',
+              'Customer Due Diligence (KYC)',
+              'Manajemen Portofolio Deposito',
+            ],
+          },
+          {
+            id: 'iba-teller',
+            name: 'IBA Teller',
+            fullName: 'Islamic Banking Application — Teller System',
+            category: 'Core Sharia Banking Transaction System',
+            level: 'Proficient (90%)',
+            percentage: 90,
+            badge: 'Core Islamic Banking',
+            description:
+              'Aplikasi transaksi teller bank syariah untuk pemrosesan setoran/penarikan tunai, pemindahbukuan (overbooking), kliring, distribusi bagi hasil (nisbah), pencairan pembiayaan, serta rekonsiliasi kas harian teller.',
+            capabilities: [
+              'Transaksi Setor & Tarik Tunai',
+              'Overbooking & Kliring Syariah',
+              'Pencairan & Angsuran Pembiayaan',
+              'Rekonsiliasi Kas Akhir Hari',
+            ],
+          },
+        ],
+        supportingSkills: [
+          'Zahir Accounting',
+          'ANP / AHP Decision Modeling',
+          'PSAK Syariah (101–107)',
+          'Financial Ratio Analysis',
+          'Microsoft Word & PowerPoint',
+          'Canva & Figma UI Design',
+          'Bahasa Indonesia (Native)',
+          'English (Speech Winner)',
+          'Arabic (Active)',
+        ],
+      };
+
+      const StarfieldBackground = () => {
+        const canvasRef = useRef(null);
+        useEffect(() => {
+          const canvas = canvasRef.current;
+          if (!canvas) return;
+          const ctx = canvas.getContext('2d');
+          let animationFrameId;
+          let width = (canvas.width = window.innerWidth);
+          let height = (canvas.height = window.innerHeight);
+
+          const handleResize = () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+          };
+          window.addEventListener('resize', handleResize);
+
+          const starCount = Math.min(Math.floor((width * height) / 7000), 220);
+          const stars = Array.from({ length: starCount }, () => ({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            radius: Math.random() * 1.65 + 0.35,
+            alpha: Math.random() * 0.8 + 0.2,
+            deltaAlpha: (Math.random() * 0.012 + 0.003) * (Math.random() < 0.5 ? 1 : -1),
+            speedY: Math.random() * 0.18 + 0.04,
+            speedX: (Math.random() - 0.5) * 0.06,
+            isBlue: Math.random() > 0.65,
+          }));
+
+          let shootingStar = null;
+          const spawnShootingStar = () => {
+            if (Math.random() < 0.008 && !shootingStar) {
+              shootingStar = {
+                x: Math.random() * width * 0.8 + width * 0.1,
+                y: Math.random() * height * 0.35,
+                length: Math.random() * 90 + 60,
+                speed: Math.random() * 9 + 7,
+                angle: Math.PI / 4 + (Math.random() - 0.5) * 0.2,
+                opacity: 1,
+              };
+            }
+          };
+
+          const render = () => {
+            ctx.clearRect(0, 0, width, height);
+            for (const star of stars) {
+              star.alpha += star.deltaAlpha;
+              if (star.alpha <= 0.15 || star.alpha >= 0.95) star.deltaAlpha = -star.deltaAlpha;
+              star.y -= star.speedY;
+              star.x += star.speedX;
+              if (star.y < 0) star.y = height;
+              if (star.x < 0) star.x = width;
+              if (star.x > width) star.x = 0;
+
+              ctx.beginPath();
+              ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+              if (star.isBlue) {
+                ctx.fillStyle = `rgba(91, 142, 245, ${star.alpha})`;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = '#2c67ed';
+              } else {
+                ctx.fillStyle = `rgba(248, 250, 252, ${star.alpha})`;
+                ctx.shadowBlur = 0;
+              }
+              ctx.fill();
+            }
+
+            spawnShootingStar();
+            if (shootingStar) {
+              const tailX = shootingStar.x - Math.cos(shootingStar.angle) * shootingStar.length;
+              const tailY = shootingStar.y - Math.sin(shootingStar.angle) * shootingStar.length;
+              const gradient = ctx.createLinearGradient(shootingStar.x, shootingStar.y, tailX, tailY);
+              gradient.addColorStop(0, `rgba(91, 142, 245, ${shootingStar.opacity})`);
+              gradient.addColorStop(0.4, `rgba(44, 103, 237, ${shootingStar.opacity * 0.6})`);
+              gradient.addColorStop(1, 'rgba(44, 103, 237, 0)');
+              ctx.beginPath();
+              ctx.moveTo(shootingStar.x, shootingStar.y);
+              ctx.lineTo(tailX, tailY);
+              ctx.strokeStyle = gradient;
+              ctx.lineWidth = 2;
+              ctx.stroke();
+              shootingStar.x += Math.cos(shootingStar.angle) * shootingStar.speed;
+              shootingStar.y += Math.sin(shootingStar.angle) * shootingStar.speed;
+              shootingStar.opacity -= 0.018;
+              if (shootingStar.opacity <= 0 || shootingStar.x > width || shootingStar.y > height) {
+                shootingStar = null;
+              }
+            }
+            animationFrameId = requestAnimationFrame(render);
+          };
+          render();
+          return () => {
+            cancelAnimationFrame(animationFrameId);
+            window.removeEventListener('resize', handleResize);
+          };
+        }, []);
+
+        return (
+          <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#03050a]">
+            <div
+              className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full opacity-25 blur-[135px]"
+              style={{
+                background: 'radial-gradient(circle, #2c67ed 0%, rgba(29, 78, 216, 0.2) 55%, transparent 80%)',
+              }}
+            />
+            <div
+              className="absolute top-[42%] -left-48 w-[550px] h-[550px] rounded-full opacity-15 blur-[130px]"
+              style={{ background: 'radial-gradient(circle, #2c67ed 0%, transparent 70%)' }}
+            />
+            <div
+              className="absolute bottom-[-10%] -right-40 w-[600px] h-[600px] rounded-full opacity-15 blur-[140px]"
+              style={{ background: 'radial-gradient(circle, #38bdf8 0%, #2c67ed 45%, transparent 75%)' }}
+            />
+            <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+          </div>
+        );
+      };
+
+      const Navbar = () => {
+        const [activeSection, setActiveSection] = useState('home');
+        const navLinks = [
+          { id: 'home', label: 'Home' },
+          { id: 'about', label: 'About Me' },
+          { id: 'portfolio', label: 'Portfolio' },
+          { id: 'contact', label: 'Contact' },
+        ];
+
+        useEffect(() => {
+          const handleScroll = () => {
+            const scrollPosition = window.scrollY + 240;
+            for (const item of navLinks) {
+              const section = document.getElementById(item.id);
+              if (section) {
+                const top = section.offsetTop;
+                const height = section.offsetHeight;
+                if (scrollPosition >= top && scrollPosition < top + height) {
+                  setActiveSection(item.id);
+                  break;
+                }
+              }
+            }
+          };
+          window.addEventListener('scroll', handleScroll);
+          return () => window.removeEventListener('scroll', handleScroll);
+        }, []);
+
+        const scrollToSection = (id) => {
+          setActiveSection(id);
+          const el = document.getElementById(id);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        };
+
+        return (
+          <header className="fixed top-5 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
+            <nav className="pointer-events-auto flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2.5 rounded-full border bg-[#070b14]/85 border-[#2c67ed]/55 shadow-[0_0_32px_-2px_rgba(44,103,237,0.58)] backdrop-blur-xl">
+              <button
+                onClick={() => scrollToSection('home')}
+                className="flex items-center gap-2 pr-2 sm:pr-3 mr-1 border-r border-slate-800 text-left"
+              >
+                <span className="w-7 h-7 rounded-full bg-[#2c67ed]/20 border border-[#2c67ed]/60 flex items-center justify-center text-[#5b8ef5] shadow-[0_0_12px_rgba(44,103,237,0.6)]">
+                  ✦
+                </span>
+                <span className="hidden md:inline font-display font-semibold text-sm tracking-tight text-white">
+                  Aiza<span className="text-[#2c67ed]">.</span>Finance
+                </span>
+              </button>
+              <div className="flex items-center gap-1">
+                {navLinks.map((item) => {
+                  const isActive = activeSection === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => scrollToSection(item.id)}
+                      className={`relative px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 ${
+                        isActive
+                          ? 'bg-[#2c67ed] text-white shadow-[0_0_18px_rgba(44,103,237,0.85)]'
+                          : 'text-slate-300 hover:text-white'
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  );
+                })}
+              </div>
+              <a
+                href={profileData.cvUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden sm:inline-flex items-center gap-1.5 ml-1 pl-3 border-l border-slate-800 text-xs font-medium text-[#5b8ef5] hover:text-white transition-colors"
+              >
+                <span>CV PDF</span>
+              </a>
+            </nav>
+          </header>
+        );
+      };
+
+      const Hero = () => {
+        const [roleIndex, setRoleIndex] = useState(0);
+        const [displayedText, setDisplayedText] = useState('');
+        const [isDeleting, setIsDeleting] = useState(false);
+
+        useEffect(() => {
+          const currentRole = profileData.roles[roleIndex];
+          const typingSpeed = isDeleting ? 42 : 85;
+          const timer = setTimeout(() => {
+            if (!isDeleting && displayedText === currentRole) {
+              setTimeout(() => setIsDeleting(true), 1800);
+            } else if (isDeleting && displayedText === '') {
+              setIsDeleting(false);
+              setRoleIndex((prev) => (prev + 1) % profileData.roles.length);
+            } else {
+              setDisplayedText(currentRole.substring(0, displayedText.length + (isDeleting ? -1 : 1)));
+            }
+          }, typingSpeed);
+          return () => clearTimeout(timer);
+        }, [displayedText, isDeleting, roleIndex]);
+
+        return (
+          <section
+            id="home"
+            className="relative min-h-screen flex items-center justify-center pt-28 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden"
+          >
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[540px] h-[540px] sm:w-[760px] sm:h-[760px] rounded-full border border-[#2c67ed]/15 pointer-events-none" />
+            <div className="relative z-10 max-w-5xl mx-auto text-center">
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#0d1424]/90 border border-[#2c67ed]/40 shadow-[0_0_20px_rgba(44,103,237,0.3)] mb-8">
+                <span className="h-2.5 w-2.5 rounded-full bg-[#2c67ed] animate-ping" />
+                <span className="text-xs sm:text-sm font-medium text-slate-200 tracking-wide">
+                  D4 Keuangan & Perbankan Syariah • Politeknik Negeri Jakarta
+                </span>
+              </div>
+
+              <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6 leading-[1.08]">
+                <span className="bg-clip-text text-transparent bg-gradient-to-b from-white via-slate-100 to-slate-400">
+                  Aiza El Diana
+                </span>
+                <span
+                  className="inline-block ml-2 w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-[#2c67ed]"
+                  style={{ boxShadow: '0 0 20px #2c67ed, 0 0 40px #2c67ed' }}
+                />
+              </h1>
+
+              <div className="h-14 flex items-center justify-center mb-6">
+                <div className="inline-flex items-center px-5 py-2 rounded-2xl bg-[#070b14]/80 border border-[#2c67ed]/35 shadow-[0_0_25px_rgba(44,103,237,0.25)]">
+                  <span className="text-[#2c67ed] mr-2.5">✦</span>
+                  <span className="font-mono text-lg sm:text-2xl md:text-3xl font-semibold text-[#5b8ef5] tracking-tight">
+                    {displayedText}
+                  </span>
+                  <span className="ml-1 w-0.5 h-6 sm:h-8 bg-[#2c67ed] animate-pulse" />
+                </div>
+              </div>
+
+              <p className="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-slate-300/90 leading-relaxed mb-10">
+                {profileData.tagline}
+              </p>
+
+              <div className="flex flex-wrap items-center justify-center gap-4 mb-14">
+                <a
+                  href="#portfolio"
+                  className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-[#2c67ed] hover:bg-[#1d4ed8] text-white font-semibold text-sm sm:text-base transition-all duration-300 shadow-[0_0_28px_rgba(44,103,237,0.65)]"
+                >
+                  <span>Jelajahi Portfolio →</span>
+                </a>
+                <a
+                  href={profileData.cvUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-[#0d1424]/90 hover:bg-[#152038] text-slate-100 font-semibold text-sm sm:text-base border border-[#2c67ed]/40 hover:border-[#2c67ed] transition-all duration-300"
+                >
+                  <span>Download CV (PDF)</span>
+                </a>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 max-w-3xl mx-auto">
+                <div className="space-card rounded-2xl p-4 flex items-center gap-3.5 text-left">
+                  <div className="w-10 h-10 rounded-xl bg-[#2c67ed]/20 border border-[#2c67ed]/40 flex items-center justify-center text-[#5b8ef5] font-bold">
+                    100
+                  </div>
+                  <div>
+                    <div className="text-xs text-slate-400">Sertifikasi Profesi</div>
+                    <div className="text-sm font-semibold text-white">CAP Accurate (Nilai 100)</div>
+                  </div>
+                </div>
+                <div className="space-card rounded-2xl p-4 flex items-center gap-3.5 text-left">
+                  <div className="w-10 h-10 rounded-xl bg-[#2c67ed]/20 border border-[#2c67ed]/40 flex items-center justify-center text-[#5b8ef5] font-bold">
+                    #3
+                  </div>
+                  <div>
+                    <div className="text-xs text-slate-400">Prestasi Nasional</div>
+                    <div className="text-sm font-semibold text-white">Juara 3 TEMILNAS × UI</div>
+                  </div>
+                </div>
+                <div className="space-card rounded-2xl p-4 flex items-center gap-3.5 text-left">
+                  <div className="w-10 h-10 rounded-xl bg-[#2c67ed]/20 border border-[#2c67ed]/40 flex items-center justify-center text-[#5b8ef5] font-bold">
+                    GSA
+                  </div>
+                  <div>
+                    <div className="text-xs text-slate-400">Kepemimpinan Aktif</div>
+                    <div className="text-sm font-semibold text-white">GSA Google & Station Mgr</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      };
+
+      const About = () => (
+        <section id="about" className="relative z-10 py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2c67ed]/15 border border-[#2c67ed]/40 text-[#5b8ef5] text-xs font-semibold uppercase tracking-wider mb-4">
+              ✦ About Me
+            </div>
+            <h2 className="font-display text-3xl sm:text-5xl font-bold text-white tracking-tight mb-4">
+              Profil, Pendidikan & <span className="text-[#2c67ed]">Kepemimpinan</span>
+            </h2>
+            <p className="max-w-2xl mx-auto text-slate-400 text-sm sm:text-base">
+              Perpaduan kompetensi analitis keuangan syariah, akuntansi terkomputerisasi, serta pengalaman memimpin organisasi dan proyek anggaran berskala kampus maupun nasional.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-14">
+            <div className="lg:col-span-5">
+              <div className="space-card rounded-3xl p-6 sm:p-7 h-full flex flex-col justify-between relative overflow-hidden">
+                <div>
+                  <div className="relative rounded-2xl overflow-hidden border-2 border-[#2c67ed]/50 shadow-[0_0_30px_rgba(44,103,237,0.35)] aspect-[4/4.6] mb-6 bg-[#070b14]">
+                    <img
+                      src={profileData.photoUrl}
+                      alt={profileData.fullName}
+                      className="w-full h-full object-cover object-top"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#03050a] via-transparent to-transparent opacity-80" />
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <span className="inline-block px-3 py-1 rounded-full bg-[#2c67ed] text-white text-xs font-semibold shadow-lg mb-1.5">
+                        Google Student Ambassador &apos;25
+                      </span>
+                      <h3 className="font-display text-xl font-bold text-white">{profileData.fullName}</h3>
+                      <p className="text-xs text-slate-300 mt-0.5">{profileData.location}</p>
+                    </div>
+                  </div>
+                  <p className="text-slate-300 text-sm leading-relaxed mb-5">
+                    Mahasiswa aktif <strong className="text-white">D4 Keuangan dan Perbankan Syariah</strong> di{' '}
+                    <strong className="text-[#5b8ef5]">Politeknik Negeri Jakarta</strong> dengan IPK{' '}
+                    <strong className="text-white">3,71 / 4,00</strong>. Terbiasa menyusun Rencana Anggaran Biaya (RAB), menghitung HPP, mencatat transaksi akuntansi, serta merancang analisis riset berbasis metode ANP/AHP dan Single Index Model.
+                  </p>
+                </div>
+                <div className="grid grid-cols-2 gap-3 pt-4 border-t border-slate-800/80">
+                  <div className="p-3 rounded-xl bg-[#070b14]/90 border border-slate-800">
+                    <div className="text-xs text-slate-400">Program Studi</div>
+                    <div className="text-sm font-semibold text-white mt-0.5">D4 Keuangan & Bank Syariah</div>
+                  </div>
+                  <div className="p-3 rounded-xl bg-[#070b14]/90 border border-slate-800">
+                    <div className="text-xs text-slate-400">Fokus Utama</div>
+                    <div className="text-sm font-semibold text-[#5b8ef5] mt-0.5">Finance, Audit & Riset</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-7 flex flex-col gap-6">
+              <div className="space-card rounded-3xl p-6 sm:p-8">
+                <h3 className="font-display text-xl font-bold text-white mb-6">Riwayat Pendidikan</h3>
+                <div className="space-y-6">
+                  {educationData.map((edu, idx) => (
+                    <div key={idx} className="relative pl-6 border-l-2 border-[#2c67ed]/50">
+                      <span className="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-[#03050a] border-2 border-[#2c67ed] shadow-[0_0_10px_#2c67ed]" />
+                      <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
+                        <h4 className="font-display text-base sm:text-lg font-bold text-white">{edu.institution}</h4>
+                        <span className="px-3 py-1 rounded-full bg-[#2c67ed]/20 border border-[#2c67ed]/40 text-[#5b8ef5] text-xs font-mono font-semibold">
+                          {edu.gpa}
+                        </span>
+                      </div>
+                      <div className="text-sm font-medium text-[#5b8ef5] mb-1">{edu.degree}</div>
+                      <div className="text-xs text-slate-400 mb-3">{edu.period}</div>
+                      <ul className="space-y-1.5">
+                        {edu.highlights.map((item, i) => (
+                          <li key={i} className="text-xs sm:text-sm text-slate-300 flex items-start gap-2">
+                            <span className="text-[#2c67ed]">✓</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-card rounded-3xl p-6 sm:p-8">
+                <h3 className="font-display text-xl font-bold text-white mb-6">
+                  Riwayat Kepemimpinan & Organisasi
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {leadershipData.map((lead, idx) => (
+                    <div
+                      key={idx}
+                      className="p-4 rounded-2xl bg-[#070b14]/85 border border-slate-800/90 hover:border-[#2c67ed]/60 transition-all flex flex-col justify-between"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between gap-2 mb-2">
+                          <span className="px-2.5 py-0.5 rounded-full bg-[#2c67ed]/15 border border-[#2c67ed]/40 text-[#5b8ef5] text-[11px] font-semibold">
+                            {lead.badge}
+                          </span>
+                          <span className="text-[11px] text-slate-400 font-mono">{lead.period}</span>
+                        </div>
+                        <h4 className="font-display font-bold text-white text-base">{lead.role}</h4>
+                        <div className="text-xs font-medium text-[#5b8ef5] mb-2">{lead.organization}</div>
+                        <p className="text-xs text-slate-300 leading-relaxed mb-3">{lead.description}</p>
+                      </div>
+                      <div className="pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-xs">
+                        <span className="text-slate-400">Impact</span>
+                        <span className="font-mono font-semibold text-white">{lead.metrics}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-card rounded-3xl p-6 sm:p-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+              <div>
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-white">
+                  Statistik Analisis Keuangan & Budgeting Project
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-400">
+                  Rekam jejak kuantitatif pengelolaan anggaran, akurasi pelaporan LPJ, dan riset finansial
+                </p>
+              </div>
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#2c67ed]/15 border border-[#2c67ed]/40 text-xs font-mono text-[#5b8ef5]">
+                ● Verified Track Record
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+              {analyticsStats.summaryCards.map((stat, idx) => (
+                <div key={idx} className="p-5 rounded-2xl bg-[#070b14]/90 border border-slate-800">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs text-slate-400">{stat.label}</span>
+                    <span className="px-2 py-0.5 rounded-md bg-[#2c67ed]/20 text-[#5b8ef5] text-[10px] font-mono font-semibold">
+                      {stat.trend}
+                    </span>
+                  </div>
+                  <div className="font-display text-2xl sm:text-3xl font-bold text-white mb-1">{stat.value}</div>
+                  <div className="text-xs text-slate-400">{stat.subtext}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {analyticsStats.budgetBreakdown.map((item, idx) => (
+                <div key={idx} className="p-4 sm:p-5 rounded-2xl bg-[#070b14]/75 border border-slate-800/80">
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                    <div>
+                      <span className="text-[11px] font-mono uppercase tracking-wider text-[#5b8ef5]">
+                        {item.category}
+                      </span>
+                      <h4 className="font-display font-semibold text-white text-sm sm:text-base">{item.project}</h4>
+                    </div>
+                    <span className="font-mono text-sm font-bold text-white bg-[#2c67ed]/20 border border-[#2c67ed]/40 px-2.5 py-1 rounded-lg">
+                      {item.budget}
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-400 mb-3">{item.details}</p>
+                  <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                    <div
+                      style={{ width: `${item.accuracy}%` }}
+                      className="h-full rounded-full bg-gradient-to-r from-[#2c67ed] to-[#38bdf8] shadow-[0_0_12px_#2c67ed]"
+                    />
+                  </div>
+                  <div className="flex justify-between text-[11px] text-slate-400 mt-1.5 font-mono">
+                    <span>Efisiensi & Akuntabilitas</span>
+                    <span className="text-[#5b8ef5] font-semibold">{item.accuracy}%</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+
+      const Portfolio = () => {
+        const [activeTab, setActiveTab] = useState('businessCases');
+        const [previewModal, setPreviewModal] = useState(null);
+
+        const tabs = [
+          { id: 'businessCases', label: 'Business Cases & Projects', count: portfolioTabs.businessCases.length },
+          { id: 'awards', label: 'Awards & Certificates', count: portfolioTabs.awards.length },
+          { id: 'financialTools', label: 'Financial Tools', count: portfolioTabs.financialTools.length },
+        ];
+
+        return (
+          <section id="portfolio" className="relative z-10 py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2c67ed]/15 border border-[#2c67ed]/40 text-[#5b8ef5] text-xs font-semibold uppercase tracking-wider mb-4">
+                ✦ Featured Works & Credentials
+              </div>
+              <h2 className="font-display text-3xl sm:text-5xl font-bold text-white tracking-tight mb-4">
+                Eksplorasi <span className="text-[#2c67ed]">Portfolio</span>
+              </h2>
+              <p className="max-w-2xl mx-auto text-slate-400 text-sm sm:text-base">
+                Kumpulan studi kasus bisnis, rancangan HPP & budgeting, riset ANP/AHP ekonomi syariah, penghargaan nasional, serta penguasaan software keuangan & perbankan.
+              </p>
+            </div>
+
+            <div className="flex justify-center mb-12">
+              <div className="inline-flex flex-wrap justify-center gap-2 p-2 rounded-2xl bg-[#070b14]/90 border border-[#2c67ed]/35 shadow-[0_0_25px_rgba(44,103,237,0.2)]">
+                {tabs.map((tab) => {
+                  const isSelected = activeTab === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => setActiveTab(tab.id)}
+                      className={`flex items-center gap-2.5 px-4 sm:px-6 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+                        isSelected
+                          ? 'bg-[#2c67ed] text-white shadow-[0_0_20px_rgba(44,103,237,0.75)]'
+                          : 'text-slate-400 hover:text-slate-200'
+                      }`}
+                    >
+                      <span>{tab.label}</span>
+                      <span
+                        className={`px-2 py-0.5 rounded-full text-[11px] font-mono ${
+                          isSelected ? 'bg-white/20 text-white' : 'bg-slate-800 text-slate-400'
+                        }`}
+                      >
+                        {tab.count}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {activeTab === 'businessCases' && (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-7">
+                {portfolioTabs.businessCases.map((project) => (
+                  <div key={project.id} className="space-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                      <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <span className="px-3 py-1 rounded-full bg-[#2c67ed]/20 border border-[#2c67ed]/40 text-[#5b8ef5] text-xs font-semibold">
+                          {project.category}
+                        </span>
+                        <span className="font-mono text-xs text-slate-300 bg-[#070b14] border border-slate-800 px-3 py-1 rounded-full">
+                          {project.highlightMetric}
+                        </span>
+                      </div>
+                      <h3 className="font-display text-xl sm:text-2xl font-bold text-white mb-1.5">{project.title}</h3>
+                      <p className="text-xs sm:text-sm font-medium text-[#5b8ef5] mb-4">{project.subtitle}</p>
+                      <p className="text-sm text-slate-300 leading-relaxed mb-5">{project.summary}</p>
+                      <div className="space-y-2 mb-6">
+                        {project.keyPoints.map((pt, idx) => (
+                          <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
+                            <span className="text-[#2c67ed]">✓</span>
+                            <span>{pt}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="grid grid-cols-3 gap-2.5 p-3.5 rounded-2xl bg-[#070b14]/90 border border-slate-800/90 mb-5">
+                        {project.metrics.map((m, i) => (
+                          <div key={i}>
+                            <div className="text-[11px] text-slate-400">{m.label}</div>
+                            <div className="text-xs sm:text-sm font-semibold text-white mt-0.5">{m.value}</div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-800/80">
+                        <div className="flex flex-wrap gap-1.5">
+                          {project.tags.map((tag, i) => (
+                            <span
+                              key={i}
+                              className="px-2.5 py-1 rounded-lg bg-slate-900/90 border border-slate-800 text-[11px] text-slate-300"
+                            >
+                              #{tag}
+                            </span>
+                          ))}
+                        </div>
+                        {project.documentUrl && (
+                          <a
+                            href={project.documentUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#2c67ed]/20 hover:bg-[#2c67ed] text-[#5b8ef5] hover:text-white border border-[#2c67ed]/40 text-xs font-semibold transition-all"
+                          >
+                            <span>Buka Dokumen PDF ↗</span>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {activeTab === 'awards' && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {portfolioTabs.awards.map((award) => (
+                  <div key={award.id} className="space-card rounded-3xl p-6 flex flex-col justify-between">
+                    <div>
+                      <div className="relative h-44 rounded-2xl overflow-hidden bg-[#070b14] border border-slate-800 mb-5 flex items-center justify-center">
+                        {award.previewType === 'image' ? (
+                          <img src={award.previewUrl} alt={award.title} className="w-full h-full object-cover" />
+                        ) : (
+                          <div className="text-center p-6">
+                            <div className="w-12 h-12 rounded-2xl bg-[#2c67ed]/20 border border-[#2c67ed]/50 flex items-center justify-center text-[#5b8ef5] mx-auto mb-2">
+                              ★
+                            </div>
+                            <span className="text-xs font-mono text-[#5b8ef5]">Official Certificate PDF</span>
+                          </div>
+                        )}
+                        <div className="absolute top-3 left-3">
+                          <span className="px-3 py-1 rounded-full bg-[#03050a]/90 border border-[#2c67ed]/50 text-[#5b8ef5] text-[11px] font-semibold">
+                            {award.badge}
+                          </span>
+                        </div>
+                      </div>
+                      <h3 className="font-display text-lg font-bold text-white mb-1.5">{award.title}</h3>
+                      <div className="text-xs font-medium text-[#5b8ef5] mb-3">{award.issuer}</div>
+                      <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-5">{award.description}</p>
+                    </div>
+                    <div className="pt-3 border-t border-slate-800/80">
+                      <a
+                        href={award.previewUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#2c67ed]/20 hover:bg-[#2c67ed] text-[#5b8ef5] hover:text-white border border-[#2c67ed]/40 text-xs font-semibold transition-all"
+                      >
+                        <span>Lihat Sertifikat ↗</span>
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {activeTab === 'financialTools' && (
+              <div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                  {portfolioTabs.financialTools.map((tool) => (
+                    <div key={tool.id} className="space-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
+                      <div>
+                        <div className="flex items-center justify-between gap-2 mb-3">
+                          <h3 className="font-display text-xl font-bold text-white">{tool.name}</h3>
+                          <span className="px-2.5 py-0.5 rounded-full bg-[#2c67ed]/20 border border-[#2c67ed]/40 text-[#5b8ef5] text-[11px] font-semibold">
+                            {tool.badge}
+                          </span>
+                        </div>
+                        <div className="text-xs font-medium text-[#5b8ef5] mb-4">{tool.category}</div>
+                        <p className="text-sm text-slate-300 leading-relaxed mb-5">{tool.description}</p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
+                          {tool.capabilities.map((cap, idx) => (
+                            <div
+                              key={idx}
+                              className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[#070b14]/85 border border-slate-800 text-xs text-slate-200"
+                            >
+                              <span className="text-[#2c67ed]">✓</span>
+                              <span>{cap}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="pt-4 border-t border-slate-800/80">
+                        <div className="flex justify-between text-xs mb-2">
+                          <span className="text-slate-400">Tingkat Penguasaan</span>
+                          <span className="font-mono font-semibold text-[#5b8ef5]">{tool.level}</span>
+                        </div>
+                        <div className="w-full h-2.5 rounded-full bg-slate-800 overflow-hidden">
+                          <div
+                            style={{ width: `${tool.percentage}%` }}
+                            className="h-full rounded-full bg-gradient-to-r from-[#2c67ed] to-[#38bdf8] shadow-[0_0_12px_#2c67ed]"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </section>
+        );
+      };
+
+      const Contact = () => {
+        const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+        const handleSubmit = (e) => {
+          e.preventDefault();
+          const mailtoSubject = encodeURIComponent(formData.subject || `Pesan Portfolio dari ${formData.name}`);
+          const mailtoBody = encodeURIComponent(
+            `Halo Aiza El Diana,\n\nNama: ${formData.name}\nEmail: ${formData.email}\n\nPesan:\n${formData.message}`
+          );
+          window.open(`mailto:${profileData.email}?subject=${mailtoSubject}&body=${mailtoBody}`, '_blank');
+        };
+
+        return (
+          <section id="contact" className="relative z-10 py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2c67ed]/15 border border-[#2c67ed]/40 text-[#5b8ef5] text-xs font-semibold uppercase tracking-wider mb-4">
+                ✦ Get In Touch
+              </div>
+              <h2 className="font-display text-3xl sm:text-5xl font-bold text-white tracking-tight mb-4">
+                Mari <span className="text-[#2c67ed]">Terhubung</span> & Berkolaborasi
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              <div className="lg:col-span-5 space-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
+                <div className="space-y-4">
+                  <h3 className="font-display text-xl font-bold text-white mb-2">Informasi Kontak & Sosial Media</h3>
+                  <a
+                    href={profileData.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block p-4 rounded-2xl bg-[#070b14]/90 border border-slate-800 hover:border-[#2c67ed] transition-all"
+                  >
+                    <div className="text-xs text-slate-400">LinkedIn</div>
+                    <div className="text-sm font-semibold text-[#5b8ef5]">linkedin.com/in/aiza-diana-59169830b ↗</div>
+                  </a>
+                  <a
+                    href={`mailto:${profileData.email}`}
+                    className="block p-4 rounded-2xl bg-[#070b14]/90 border border-slate-800 hover:border-[#2c67ed] transition-all"
+                  >
+                    <div className="text-xs text-slate-400">Email</div>
+                    <div className="text-sm font-semibold text-white">{profileData.email}</div>
+                  </a>
+                  <a
+                    href="https://wa.me/6281398721976"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block p-4 rounded-2xl bg-[#070b14]/90 border border-slate-800 hover:border-[#2c67ed] transition-all"
+                  >
+                    <div className="text-xs text-slate-400">Telepon / WhatsApp</div>
+                    <div className="text-sm font-semibold text-white">{profileData.phone}</div>
+                  </a>
+                </div>
+                <div className="mt-6 pt-6 border-t border-slate-800">
+                  <a
+                    href={profileData.cvUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full block text-center py-3.5 px-5 rounded-2xl bg-[#2c67ed]/20 hover:bg-[#2c67ed] border border-[#2c67ed]/50 text-[#5b8ef5] hover:text-white font-semibold text-sm transition-all"
+                  >
+                    Lihat & Unduh Curriculum Vitae (PDF)
+                  </a>
+                </div>
+              </div>
+
+              <div className="lg:col-span-7 space-card rounded-3xl p-6 sm:p-8">
+                <h3 className="font-display text-xl font-bold text-white mb-4">Kirim Pesan Langsung</h3>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <input
+                      type="text"
+                      required
+                      placeholder="Nama Lengkap"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl bg-[#070b14] border border-slate-800 focus:border-[#2c67ed] focus:outline-none text-sm text-white"
+                    />
+                    <input
+                      type="email"
+                      required
+                      placeholder="Alamat Email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl bg-[#070b14] border border-slate-800 focus:border-[#2c67ed] focus:outline-none text-sm text-white"
+                    />
+                  </div>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Subjek / Keperluan"
+                    value={formData.subject}
+                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl bg-[#070b14] border border-slate-800 focus:border-[#2c67ed] focus:outline-none text-sm text-white"
+                  />
+                  <textarea
+                    rows="5"
+                    required
+                    placeholder="Tuliskan pesan Anda..."
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl bg-[#070b14] border border-slate-800 focus:border-[#2c67ed] focus:outline-none text-sm text-white"
+                  />
+                  <button
+                    type="submit"
+                    className="w-full py-4 rounded-xl bg-[#2c67ed] hover:bg-[#1d4ed8] text-white font-semibold text-sm shadow-[0_0_25px_rgba(44,103,237,0.6)] transition-all"
+                  >
+                    Kirim Pesan Sekarang
+                  </button>
+                </form>
+              </div>
+            </div>
+          </section>
+        );
+      };
+
+      const App = () => (
+        <div className="relative min-h-screen bg-[#03050a] text-slate-100">
+          <StarfieldBackground />
+          <Navbar />
+          <main className="relative z-10">
+            <Hero />
+            <About />
+            <Portfolio />
+            <Contact />
+          </main>
+          <footer className="relative z-10 border-t border-slate-800/80 bg-[#03050a]/90 py-8 px-4 text-center text-xs text-slate-500">
+            © {new Date().getFullYear()} Aiza El Diana Suprayogi — D4 Keuangan dan Perbankan Syariah, Politeknik Negeri Jakarta.
+          </footer>
+        </div>
+      );
+
+      ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+  </body>
+</html>
